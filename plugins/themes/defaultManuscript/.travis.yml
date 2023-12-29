@@ -1,0 +1,39 @@
+# @file
+# .travis.yml - PKP Plugins Integration
+
+language: php
+
+addons:
+  chrome: beta
+  postgresql: "9.5"
+  apt:
+    update: true
+    packages:
+      - libvulkan1
+      - libu2f-udev
+
+sudo: required
+
+php:
+  - 7.3
+  - 7.4
+env:
+  - APPLICATION=ojs BRANCH=master TEST=mysql
+  - APPLICATION=ojs BRANCH=master TEST=pgsql
+
+install:
+  # Prepare OJS environment
+  - git clone -b ${BRANCH} https://github.com/pkp/${APPLICATION} ~/${APPLICATION}
+  - cd ~/${APPLICATION}
+  - git submodule update --init --recursive
+  - source lib/pkp/tools/travis/prepare-tests.sh
+  - lib/pkp/tools/travis/prepare-webserver.sh
+  # Build/install dependencies
+  - lib/pkp/tools/travis/install-composer-dependencies.sh
+  - npm i g -npm && npm install && npm run build
+  - ln -s ${TRAVIS_BUILD_DIR} ~/${APPLICATION}/plugins/themes/defaultManuscript
+  # Install OJS & prep data environment
+  - $(npm bin)/cypress run --spec "cypress/tests/data/10-ApplicationSetup/10-Installation.cy.js,cypress/tests/data/10-ApplicationSetup/20-CreateContext.cy.js"
+
+script:
+  - $(npm bin)/cypress run --config '{"specPattern":["plugins/themes/defaultManuscript/cypress/tests/functional/*.cy.js"]}'

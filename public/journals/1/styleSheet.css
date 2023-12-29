@@ -1,0 +1,65 @@
+.pkp_site_name {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.pkp_site_name > a {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.pkp_site_name .is_img img {
+  max-height: 200px !important;
+}
+.pkp_site_name_wrapper {
+  padding-left: 0;
+  padding-right: 0;
+}
+.pkp_navigation_user_wrapper {
+  top: 0;
+  right: 0;
+  padding-right: 30px;
+}
+.pkp_structure_page {
+  margin-top: 20px !important;
+  margin-bottom: 20 !important;
+  padding-bottom: 20 !important;
+  
+.pkp_brand_footer {
+	display: none;
+  }
+  
+.hover {
+	width:100%;
+	border-collapse:collapse;
+	background: #212147; 
+	font-size: 14px;
+}
+.hover th{
+	height:23px;
+	background:#ffffff;
+	color:white;
+}
+.hover td{
+	height:30px;
+	padding-top:9px;
+	vertical-align:middle;
+	border-bottom:1px solid #ffffff;
+	text-align:left;
+}
+.hover td a {
+	width:100%;
+	display:block;
+}
+.hover tr {
+	background:#1e6292;
+	color:$ffffff;
+}
+.hover tr:hover {
+	background-color:#2c5876;
+}
+.hover tr a {
+	color:#ffffff;
+}
+.hover a:hover {
+	color:#f78b4a;
+}
+	
